@@ -50,7 +50,7 @@ Following that sign in response, these fields must be provided in every subseque
 
 ### Incomes Routes:
 
-**NOTE: All of these paths are preceded by `/businesses/:bid/`**
+**NOTE: All of these paths are preceded by `/businesses/:bid/incomes/`**
 **Also, all request headers must include the fields described in the `Authentication` section**
 
 | path | method | purpose |
