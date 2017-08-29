@@ -7,8 +7,11 @@ PostgreSQL backend for controlled profits site
 All authentication is done using JSON Web Tokens. After creating a user using the request method and routes listed below, you must request a token, which will be given in the header of /auth/sign_in response if the posted user's credentials are correct. This header will contain these important fields:
 
 access-token → vrLn7nm6kNIbAaJ_AIlyQQ
+
 client → xpjUiiBvu9Ssb4oelpOBjA
+
 token-type → Bearer
+
 uid → user_email@email.com
 
 Following that sign in response, these fields must be provided in every subsequent request sent to the server in order to be authenticated. If you do not already have a solution to manage this part of the request cycle, I have read that JToker might be a good option.
