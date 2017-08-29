@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  business_id: 1
+  period_sales: 9.99
+  cash_collections: 9.99
+  credit_sales: 9.99
+  entry_date: 2017-08-28 15:04:33
+
+two:
+  business_id: 1
+  period_sales: 9.99
+  cash_collections: 9.99
+  credit_sales: 9.99
+  entry_date: 2017-08-28 15:04:33

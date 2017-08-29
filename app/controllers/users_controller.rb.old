@@ -1,0 +1,35 @@
+class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:update, :show]
+
+  def create
+    @user = User.new(user_params)
+    @user[:tier] = 1
+    if @user.save
+      puts "User created."
+      render json: {status: 'Success', message: 'New user has been created successfully', user: @user}
+    else
+      puts "User not created."
+      render json: {status: 'Failure', errors: @user.errors.full_messages}, status: :bad_request
+    end
+  end
+
+  def update
+    @user = current_user
+    if @user.update(user_params)
+      render json: {status: 'Success', message: 'User has been updated successfully', user: @user}
+    else
+      render json: {status: 'Failure', errors: @user.errors.full_messages}, status: :bad_request
+    end
+  end
+
+  def show
+    @user_businesses = Business.where({user_id: @current_user.id})
+    render json: {id: @current_user.id, firstname: @current_user.firstname, lastname: @current_user.lastname, businesses: @user_businesses} 
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:firstname, :lastname, :password, :password_confirmation)
+  end
+end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  name: MyString
+  naics: 1
+  sic: 1
+  ein: 1
+  tier: 1
+
+two:
+  user_id: 1
+  name: MyString
+  naics: 1
+  sic: 1
+  ein: 1
+  tier: 1
