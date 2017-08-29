@@ -11,7 +11,6 @@ class IncomesController < ApplicationController
   def create
     @income = Income.new(income_params)
     @income[:business_id] = params[:bid]
-    #@income[:entry_date] = DateTime.parse(params[:entry_date]).to_i
     if @income.save
       render json: {status: 'Success', message: 'New income entry has been created successfully', income: @income}
     else 
