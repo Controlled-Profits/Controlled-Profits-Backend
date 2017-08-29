@@ -4,7 +4,7 @@ class IncomesController < ApplicationController
   before_action :set_income, only: [:update, :show, :destroy]
 
   def index
-    @business_incomes = Incomes.where({business_id: @business.id})
+    @business_incomes = Income.where({business_id: @business.id})
     render json: @business_incomes
   end
 
