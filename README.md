@@ -1,6 +1,10 @@
 # Controlled Profits Backend
 
-PostgreSQL backend for controlled profits site
+Rails JSON API for controlled profits site
+
+All responses are formatted as specified by JSONAPI.org v1.0, with the exception of the Content-Type Header, which is ignored at the time of writing.
+
+http://jsonapi.org/format/
 
 ## Authentication
 
@@ -38,7 +42,7 @@ Following that sign in response, these fields must be provided in every subseque
 
 ### Business Routes:
 
-**NOTE: All of these paths are preceded by `/businesses/`**
+**NOTE: All of these paths are preceded by `/v1/businesses/`**
 **Also, all request headers must include the fields described in the `Authentication` section**
 
 | path | method | purpose |
@@ -47,10 +51,11 @@ Following that sign in response, these fields must be provided in every subseque
 | / | POST   | Creates a new business. Requires fields **`name`**, **`naics`**, **`sic`**, and **`ein`** |
 | /:bid | GET | Returns a JSON object with all of a given businesses' stored data, where :bid is the business id |
 | /:bid | PATCH/PUT | Updates a business by ID |
+| /:bid | DELETE    | Deletes a business by ID |
 
 ### Incomes Routes:
 
-**NOTE: All of these paths are preceded by `/businesses/:bid/incomes/`**
+**NOTE: All of these paths are preceded by `/v1/businesses/:bid/incomes/`**
 **Also, all request headers must include the fields described in the `Authentication` section**
 
 | path | method | purpose |
@@ -59,3 +64,4 @@ Following that sign in response, these fields must be provided in every subseque
 | / | POST   | Creates a new income entry and returns it as a JSON object if successful. Requires fields **`period_sales`**, **`cash_collections`**, **`credit_sales`**, and **`entry_date`**. **DO NOT USE COMMAS IN ENTRY VALUES**|
 | /:income_id | GET | Returns a JSON object with all of a given income entry's stored data |
 | /:income_id | PATCH/PUT | Updates an income entry by ID |
+| /:income_id | DELETE    | Deletes an income entry by ID |
