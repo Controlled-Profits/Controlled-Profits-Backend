@@ -50,6 +50,7 @@ Following that sign in response, these fields must be provided in every subseque
 | / | GET    | Returns a JSON array listing all a current user's businesses|
 | / | POST   | Creates a new business. Requires fields **`name`**, **`naics`**, **`sic`**, and **`ein`** |
 | /:bid | GET | Returns a JSON object with all of a given businesses' stored data, where :bid is the business id |
+| /:bid/data(/?start_date=yyyy/mm/dd&end_date=yyyy/mm/dd) | GET | Returns all of a businesses related data entries, optionally within a specified date range |
 | /:bid | PATCH/PUT | Updates a business by ID |
 | /:bid | DELETE    | Deletes a business by ID |
 
@@ -61,6 +62,7 @@ Following that sign in response, these fields must be provided in every subseque
 | path | method | purpose |
 |:-----|:-------|:--------|
 | / | GET    | Returns a JSON array listing all a given businesses income entries |
+| /?start_date=yyyy/mm/dd&end_date=yyyy/mm/dd) | GET | Returns all of a businesses income entries, within a specified date range |
 | / | POST   | Creates a new income entry and returns it as a JSON object if successful. Requires fields **`period_sales`**, **`cash_collections`**, **`credit_sales`**, and **`entry_date`**. **DO NOT USE COMMAS IN ENTRY VALUES**|
 | /:income_id | GET | Returns a JSON object with all of a given income entry's stored data |
 | /:income_id | PATCH/PUT | Updates an income entry by ID |

@@ -4,7 +4,6 @@ class V1::APIController < ApplicationController
   #Returns true if a user is authorized to access the business specified by a URL param
   def user_owns_business?
     unless current_user && !@business.nil? && current_user.id == @business.user_id
-      p "Business ID: #{@business.user_id}"
       render json: {data: {meta: { errors: ['Not Authenticated'] }}}, status: :unauthorized
       return
     end
