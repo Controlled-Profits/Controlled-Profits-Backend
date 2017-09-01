@@ -37,6 +37,7 @@ class V1::IncomesController < V1::APIController
       render json: {data: {meta: {message: 'Income entry deleted successfully.'}}}
     else 
       render json: {data: {meta: {errors: ['There was an error deleting that income entry.']}}}, status: :bad_request
+    end
   end
 
   private 
