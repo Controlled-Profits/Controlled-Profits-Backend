@@ -13,8 +13,8 @@ class V1::BusinessesController < V1::APIController
   #Returns a list of all a given businesses data, with optional date filtering
   def index_data
     #TODO: Add each relevant table to these queries as they are added
-    @incomes = Income.where(business_data_query_hash)
-    render json: JSONAPI::Serializer.serialize(@incomes, is_collection: true)
+    @data = BusinessDataEntry.where(business_data_query_hash)
+    render json: JSONAPI::Serializer.serialize(@data, is_collection: true)
   end
 
   def create
