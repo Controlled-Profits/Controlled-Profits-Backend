@@ -20,3 +20,7 @@ class IncomeSerializer < BaseSerializer
   attribute :credit_sales
   attribute :entry_date
 end
+
+class PDriverSerializer < BaseSerializer
+
+end
