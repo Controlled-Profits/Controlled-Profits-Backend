@@ -21,6 +21,11 @@ class IncomeSerializer < BaseSerializer
   attribute :entry_date
 end
 
-class PDriverSerializer < BaseSerializer
-
+class CostOfSalesSerializer < BaseSerializer
+  attribute :business_id
+  attribute :cogs
+  attribute :marketing
+  attribute :direct_labor
+  attribute :distribution
+  attribute :vpie
 end
