@@ -1,3 +1,4 @@
+require 'serializers/business_data_serializer'
 class V1::BusinessDataEntryController < V1::APIController
   before_action :authenticate_user!
   before_action :set_business
@@ -13,29 +14,26 @@ class V1::BusinessDataEntryController < V1::APIController
     if @bde.save
       render json: JSONAPI::Serializer.serialize(@bde)
     else
-      render 
+      render json: { errors: @bde.errors.full_messages }
     end
   end
 
-  #Individual Financial Data Sections' show methods
-
-  def income_statement
-
-  end
-
-  def balance_sheet
-
-  end
-
-  def sales_marketing
-
-  end
-
-  def financial_roi 
-
+  def show
+    @bde = BusinessDataEntry.where(business_data_query_hash)
+    @bde = [@bde] unless !@bde.nil? && @bde.count > 1
+    render json: BusinessDataSerializer.serialize(@bde, serializer_args_hash)
   end
 
   private
+
+  #Returns arguments as hash for BDE serializer function, if they are present
+  def serializer_args_hash
+    result = {}
+    #TODO: Should probably safety check these somewhere
+    result[:entry_type] = params[:entry_type] if params[:entry_type].present? 
+    result[:section] = params[:section] if params[:section].present?
+    return result
+  end
 
   def bde_params
     params.permit(:period_sales,

@@ -1,4 +1,5 @@
 require 'serializers/business_serializers'
+require 'serializers/business_data_serializer'
 class V1::BusinessesController < V1::APIController
   before_action :authenticate_user!
   before_action :set_business, only: [:show, :update, :index_data, :destroy]
@@ -13,8 +14,9 @@ class V1::BusinessesController < V1::APIController
   #Returns a list of all a given businesses data, with optional date filtering
   def index_data
     #TODO: Add each relevant table to these queries as they are added
-    @data = BusinessDataEntry.where(business_data_query_hash)
-    render json: JSONAPI::Serializer.serialize(@data, is_collection: true)
+    @bde = BusinessDataEntry.where(business_data_query_hash)
+    @bde = [@bde] unless !@bde.nil? && @bde.count > 1
+    render json: BusinessDataSerializer.serialize(@bde)
   end
 
   def create
@@ -24,7 +26,7 @@ class V1::BusinessesController < V1::APIController
     if @business.save
       render json: JSONAPI::Serializer.serialize(@business, meta: {message: 'New business has been created successfully.'})
     else 
-      render json: JSONAPI::Serializer.serialize(@business, meta: {errors: @business.errors.full_messages}), status: :bad_request
+      render json: {errors: @business.errors.full_messages}, status: :bad_request
     end
   end
 
@@ -32,7 +34,7 @@ class V1::BusinessesController < V1::APIController
     if @business.update(business_params)
       render json: JSONAPI::Serializer.serialize(@business, meta: {message: 'New business has been created successfully.'})
     else 
-      render json: JSONAPI::Serializer.serialize(@business, meta: {errors: @business.errors.full_messages}), status: :bad_request
+      render json: {errors: @business.errors.full_messages}, status: :bad_request
     end
   end
 
@@ -44,7 +46,7 @@ class V1::BusinessesController < V1::APIController
     if @business.destroy 
       render json: {data: {meta: {message: 'Business deleted successfully.'}}}
     else 
-      render json: {data: {meta: {errors: ['There was an error deleting that business.']}}}, status: :bad_request
+      render json: {errors: ['There was an error deleting that business.']}, status: :bad_request
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905182423) do
+ActiveRecord::Schema.define(version: 20170906162356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170905182423) do
     t.decimal "airp_equity"
     t.decimal "airc_for_financing"
     t.decimal "corp_tax_rate"
-    t.string "type"
+    t.string "entry_type"
     t.integer "business_id"
     t.datetime "entry_date"
     t.datetime "created_at", null: false

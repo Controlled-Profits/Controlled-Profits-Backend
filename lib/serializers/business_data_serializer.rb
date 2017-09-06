@@ -1,49 +1,88 @@
+# ========================================================================== #
+# Serializes a given BuisinessDataEntry object array as json, sorted by entry dates
+# meeting jsonapi.org v1.0 spec. Call as BusinessDataSerializer::serialize(business_data_entry, {args})
+# Arg options:
+# :section = "income_statement" || "balance_sheet" || "sales_and_marketing" || "financial_roi"
+#  - * Serializes only the given section in each entry
+# 
+# :type = "actual" || "adjusted"
+# - * Serializes only the given type of entries
+# ------------------------------------------------------------------------
+# JSON result format:
+# {
+# data: [
+#   {
+#     id: "1"
+#     type: "business_data_entry"
+#     entry_type: "(actual || adjusted)"
+#     entry_date: "2012/04/21"
+#     business_id: "5"
+#     income_statement: {...}
+#     balance_sheet: {...}
+#     sales_and_marketing: {...}
+#     financial_roi: {...}
+#   }, 
+#   {
+#     ...
+#   },
+#   ...
+# ]}
+#
+#
+#
+# ========================================================================== #
+
 class BusinessDataSerializer
-  def serialize(obj, args = {})
-    obj_attributes = obj.attributes
-    if args.has_key?(:is_collection) && args.is_collection
-      
-    else 
-      result = {
-        data: {
-          type: obj.model_name.human,
-          id: obj.id,
-          attributes: obj_attributes
-        }
+  def self.serialize(obj_array, args = {})
+    if obj_array.nil? then return Array.new.to_json end
+
+    result_data = []
+    data_sections = %w(income_statement balance_sheet sales_and_marketing financial_roi)
+
+    if args.has_key?(:section) 
+      data_sections = [args.section.downcase]
+    end
+
+    obj_array.each do |obj| 
+      next if args.has_key?(:entry_type) && obj.entry_type != args.entry_type
+      obj_data = {
+        id: obj.id,
+        type: "business_data_entry",
+        entry_type: obj.entry_type,
+        entry_date: obj.entry_date,
+        business_id: obj.business_id
       }
-    end
-
-    if args.has_key?(:section)
-      selected_keys = case args.section.downcase
-      when "income_statement"
-        %w(period_sales cash_collections credit_sales cogs marketing 
-        direct_labor distribution vpie salaries benefit_admin office_lease office_supplies
-        utilities transportation online_expenses insurance training accounting_and_legal
-        advertising marketing_development other fpie interest_paid depreciation_and_amortizaton
-        tax_rate dividends)
-      when "balance_sheet"
-        %w(cash accounts_receivable inventory prepaid_expenses
-        other_current_assets ppe furniture_and_fixtures leasehold_improvements
-        land_and_buildings other_fixed_assets accumulated_depreciation goodwill
-        accounts_payable interest_payable taxes_payable deferred_revenue short_term_notes
-        current_debt other_current_liabilities bank_loans_payable notes_payable_to_stockholders
-        other_long_term_debt common_stock paid_in_surplus retained_earnings)
-      when "sales_and_marketing"
-        %w(prospects number_of_sales marketing_spend grand_total_units)
-      when "financial_roi"
-        %w(airp_debt airp_equity airc_for_financing corp_tax_rate)
-      else 
-        obj.attributes.keys
-      end
-
-      new_attributes = {}
-      obj_attributes.each do |key, val|
-        if selected_keys.include? key
-          
+      data_sections.each do |section| #Extract given section's keys of each object
+        selected_keys = case section
+        when "income_statement" #Income Statement Group
+          %w(period_sales cash_collections credit_sales cogs marketing 
+          direct_labor distribution vpie salaries benefit_admin office_lease office_supplies
+          utilities transportation online_expenses insurance training accounting_and_legal
+          advertising marketing_development other fpie interest_paid depreciation_and_amortizaton
+          tax_rate dividends entry_date)
+        when "balance_sheet" #Balance Sheet Group
+          %w(cash accounts_receivable inventory prepaid_expenses
+          other_current_assets ppe furniture_and_fixtures leasehold_improvements
+          land_and_buildings other_fixed_assets accumulated_depreciation goodwill
+          accounts_payable interest_payable taxes_payable deferred_revenue short_term_notes
+          current_debt other_current_liabilities bank_loans_payable notes_payable_to_stockholders
+          other_long_term_debt common_stock paid_in_surplus retained_earnings entry_date)
+        when "sales_and_marketing" #Sales and marketing group
+          %w(prospects number_of_sales marketing_spend grand_total_units entry_date)
+        when "financial_roi" #Financial rates of interest group
+          %w(airp_debt airp_equity airc_for_financing corp_tax_rate entry_date)     
         end
+        section_data = {}
+        selected_keys.each {|key| section_data[key] = obj[key]}
+        obj_data[section] = section_data
       end
-    end
+      result_data.push(obj_data)
+    end 
 
+    result_obj = {
+      data: result_data
+    }
 
+    result_obj.to_json rescue nil
   end
 end
