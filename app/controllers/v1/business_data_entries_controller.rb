@@ -1,41 +1,41 @@
-class V1::BusinessDataEntryController < V1::APIController
+require 'serializers/business_data_serializer'
+class V1::BusinessDataEntriesController < V1::APIController
   before_action :authenticate_user!
   before_action :set_business
   before_action :user_owns_business?
 
   def index
-
+    @bde = Array.wrap(BusinessDataEntry.where(business_data_query_hash))
+    render json: BusinessDataSerializer.serialize(@bde, serializer_args_hash)
   end
 
   def create
+    #TODO: Ensure that two entries of the same type are not submitted in the same month ..?
     @bde = BusinessDataEntry.new(bde_params)
     @bde[:business_id] = @business.id
+    @bde[:entry_date] = Time.now.utc.end_of_month
     if @bde.save
       render json: JSONAPI::Serializer.serialize(@bde)
     else
-      render 
+      render json: { errors: @bde.errors.full_messages }
     end
   end
 
-  #Individual Financial Data Sections' show methods
-
-  def income_statement
-
-  end
-
-  def balance_sheet
-
-  end
-
-  def sales_marketing
-
-  end
-
-  def financial_roi 
-
+  def show
+    @bde = Array.wrap(BusinessDataEntry.find(params[:id]))
+    render json: BusinessDataSerializer.serialize(@bde, serializer_args_hash)
   end
 
   private
+
+  #Returns arguments as hash for BDE serializer function, if they are present
+  def serializer_args_hash
+    result = {}
+    #TODO: Should probably safety check these somewhere
+    result[:entry_type] = params[:entry_type] if params[:entry_type].present? 
+    result[:section] = params[:section] if params[:section].present?
+    return result
+  end
 
   def bde_params
     params.permit(:period_sales,

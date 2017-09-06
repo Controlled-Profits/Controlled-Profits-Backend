@@ -49,21 +49,89 @@ Following that sign in response, these fields must be provided in every subseque
 |:-----|:-------|:--------|
 | / | GET    | Returns a JSON array listing all a current user's businesses|
 | / | POST   | Creates a new business. Requires fields **`name`**, **`naics`**, **`sic`**, and **`ein`** |
-| /:bid | GET | Returns a JSON object with all of a given businesses' stored data, where :bid is the business id |
-| /:bid/data(/?start_date=yyyy/mm/dd&end_date=yyyy/mm/dd) | GET | Returns all of a businesses related data entries, optionally within a specified date range |
+| /:bid | GET | Returns a JSON object with all of a given businesses' stored details, where :bid is the business id |
 | /:bid | PATCH/PUT | Updates a business by ID |
 | /:bid | DELETE    | Deletes a business by ID |
 
-### Incomes Routes:
+### Business Data Entry Routes:
 
-**NOTE: All of these paths are preceded by `/v1/businesses/:bid/incomes/`**
+**NOTE: All of these paths are preceded by `/v1/businesses/:bid/data`**
 **Also, all request headers must include the fields described in the `Authentication` section**
 
 | path | method | purpose |
 |:-----|:-------|:--------|
-| / | GET    | Returns a JSON array listing all a given businesses income entries |
-| /?start_date=yyyy/mm/dd&end_date=yyyy/mm/dd) | GET | Returns all of a businesses income entries, within a specified date range |
-| / | POST   | Creates a new income entry and returns it as a JSON object if successful. Requires fields **`period_sales`**, **`cash_collections`**, **`credit_sales`**, and **`entry_date`**. **DO NOT USE COMMAS IN ENTRY VALUES**|
-| /:income_id | GET | Returns a JSON object with all of a given income entry's stored data |
-| /:income_id | PATCH/PUT | Updates an income entry by ID |
-| /:income_id | DELETE    | Deletes an income entry by ID |
+| / | GET    | Returns a JSON array listing the entire history of a given business' data entries |
+
+#### Optional request parameters (Join as many as necessary in the URL with the & symbol)
+| path | method | purpose |
+|:-----|:-------|:--------|
+| /?start_date=yyyy/mm/dd&end_date=yyyy/mm/dd) | GET | Returns all of a businesses data entries, within a specified date range |
+| /?section=(income_statement/balance_sheet/sales_and_marketing/finanacial_roi) | GET | Returns only one section for each businesses data entry |
+| /?entry_type=(actual/adjusted) | GET | Returns data entries by entry type: actual or adjusted |
+
+#### Creating a new business data entry:
+
+entry_date will automatically be stored as the last day at the end of the month, and is not a required field
+
+POST to /v1/businesses/:bid/data/ with the following fields: (have fun)
+
+  :period_sales,
+  :cash_collections,
+  :credit_sales,
+  :cogs,
+  :marketing,
+  :direct_labor,
+  :distribution,
+  :vpie,
+  :salaries,
+  :benefit_admin,
+  :office_lease,
+  :office_supplies,
+  :utilities,
+  :transportation,
+  :online_expenses,
+  :insurance,
+  :training,
+  :accounting_and_legal,
+  :advertising,
+  :marketing_development,
+  :other,
+  :fpie,
+  :ebitda,
+  :interest_paid,
+  :depreciation_and_amortization,
+  :tax_rate,
+  :dividends,
+  :cash,
+  :accounts_receivable,
+  :inventory,
+  :prepaid_expenses,
+  :other_current_assets,
+  :ppe,
+  :furniture_and_fixtures,
+  :leasehold_improvements,
+  :land_and_buildings,
+  :other_fixed_assets,
+  :accumulated_depriciation,
+  :goodwill,
+  :accounts_payable,
+  :interests_payable,
+  :taxes_payable,
+  :deferred_revenue,
+  :short_term_notes,
+  :current_debt,
+  :other_current_liabilities,
+  :bank_loans_payable,
+  :notes_payable_to_stockholders,
+  :other_long_term_debt,
+  :common_stock,
+  :paid_in_surplus,
+  :retained_earning,
+  :prospects,
+  :number_of_sales,
+  :marketing_spend,
+  :grand_total_unit,
+  :airp_debt,
+  :airp_equity,
+  :airc_for_financing,
+  :corp_tax_rate

@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :business_data_entry do
+    business_id "1"
+    entry_date "2017-09-03T19:34:55"
     period_sales "9.99"
     cash_collections "9.99"
     credit_sales "9.99"
@@ -60,5 +62,6 @@ FactoryGirl.define do
     airp_equity "9.99"
     airc_for_financing "9.99"
     corp_tax_rate "9.99"
+    entry_type "adjusted"
   end
 end
