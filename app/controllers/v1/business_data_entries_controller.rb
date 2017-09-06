@@ -15,7 +15,7 @@ class V1::BusinessDataEntriesController < V1::APIController
     @bde[:business_id] = @business.id
     @bde[:entry_date] = Time.now.utc.end_of_month
     if @bde.save
-      render json: JSONAPI::Serializer.serialize(@bde)
+      render json: BusinessDataSerializer.serialize(Array.wrap(@bde))
     else
       render json: { errors: @bde.errors.full_messages }
     end
