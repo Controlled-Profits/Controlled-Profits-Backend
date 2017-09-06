@@ -76,7 +76,7 @@ Following that sign in response, these fields must be provided in every subseque
     {
       id: "1"
       type: "business_data_entry"
-      entry_type: "(actual || adjusted)"
+      entry_type: "actual"
       entry_date: "2017-09-30T19:34:55.000Z"
       business_id: "5"
       income_statement: {...}
