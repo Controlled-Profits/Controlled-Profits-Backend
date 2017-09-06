@@ -69,6 +69,29 @@ Following that sign in response, these fields must be provided in every subseque
 | /?section=(income_statement/balance_sheet/sales_and_marketing/finanacial_roi) | GET | Returns only one section for each businesses data entry |
 | /?entry_type=(actual/adjusted) | GET | Returns data entries by entry type: actual or adjusted |
 
+#### JSON Response format:
+```
+{
+  data: [
+    {
+      id: "1"
+      type: "business_data_entry"
+      entry_type: "(actual || adjusted)"
+      entry_date: "2017-09-30T19:34:55.000Z"
+      business_id: "5"
+      income_statement: {...}
+      balance_sheet: {...}
+      sales_and_marketing: {...}
+      financial_roi: {...}
+    }, 
+    {
+      ...
+    },
+    ...
+  ]
+}
+```
+
 #### Creating a new business data entry:
 
 entry_date will automatically be stored as the last day at the end of the month, and is not a required field
