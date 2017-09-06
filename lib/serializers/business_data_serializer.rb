@@ -34,7 +34,7 @@
 
 class BusinessDataSerializer
   def self.serialize(obj_array, args = {})
-    if obj_array.nil? then return Array.new.to_json end
+    if obj_array.nil? || obj_array.count == 0 then return Array.new.to_json end
 
     result_data = []
     data_sections = %w(income_statement balance_sheet sales_and_marketing financial_roi)

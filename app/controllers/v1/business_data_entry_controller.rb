@@ -5,12 +5,15 @@ class V1::BusinessDataEntryController < V1::APIController
   before_action :user_owns_business?
 
   def index
-
+    @bde = Array.wrap(BusinessDataEntry.where(business_data_query_hash))
+    render json: BusinessDataSerializer.serialize(@bde, serializer_args_hash)
   end
 
   def create
+    #TODO: Ensure that two entries of the same type are not submitted in the same month ..?
     @bde = BusinessDataEntry.new(bde_params)
     @bde[:business_id] = @business.id
+    @bde[:entry_date] = Time.now.utc.end_of_month
     if @bde.save
       render json: JSONAPI::Serializer.serialize(@bde)
     else
@@ -19,8 +22,7 @@ class V1::BusinessDataEntryController < V1::APIController
   end
 
   def show
-    @bde = BusinessDataEntry.where(business_data_query_hash)
-    @bde = [@bde] unless !@bde.nil? && @bde.count > 1
+    @bde = Array.wrap(BusinessDataEntry.find(params[:id]))
     render json: BusinessDataSerializer.serialize(@bde, serializer_args_hash)
   end
 

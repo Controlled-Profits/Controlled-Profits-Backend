@@ -1,5 +1,4 @@
 require 'serializers/business_serializers'
-require 'serializers/business_data_serializer'
 class V1::BusinessesController < V1::APIController
   before_action :authenticate_user!
   before_action :set_business, only: [:show, :update, :index_data, :destroy]
@@ -9,14 +8,6 @@ class V1::BusinessesController < V1::APIController
   def index
     @user_businesses = Business.where({user_id: current_user.id})
     render json: JSONAPI::Serializer.serialize(@user_businesses, is_collection: true)
-  end
-
-  #Returns a list of all a given businesses data, with optional date filtering
-  def index_data
-    #TODO: Add each relevant table to these queries as they are added
-    @bde = BusinessDataEntry.where(business_data_query_hash)
-    @bde = [@bde] unless !@bde.nil? && @bde.count > 1
-    render json: BusinessDataSerializer.serialize(@bde)
   end
 
   def create

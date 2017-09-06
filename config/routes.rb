@@ -4,11 +4,7 @@ Rails.application.routes.draw do
   concern :api_base do
     #Business routes
     resources :businesses do
-      member do 
-        get 'data', to: 'businesses#index_data'
-      end
-      #Incomes routes
-      resources :incomes
+      resources :business_data_entries, path: '/data'
     end
   end
 
