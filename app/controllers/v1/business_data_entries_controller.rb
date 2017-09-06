@@ -1,5 +1,5 @@
 require 'serializers/business_data_serializer'
-class V1::BusinessDataEntryController < V1::APIController
+class V1::BusinessDataEntriesController < V1::APIController
   before_action :authenticate_user!
   before_action :set_business
   before_action :user_owns_business?
