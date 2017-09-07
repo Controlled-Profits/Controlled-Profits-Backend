@@ -6,6 +6,7 @@ class V1::ProfitDriversController < V1::APIController
   before_action :user_owns_business?
 
   def index
+    @pdrivers = ProfitDriver.where(business_data_query_hash)
     
   end
 
@@ -60,11 +61,16 @@ class V1::ProfitDriversController < V1::APIController
       ent_date = Time.now.utc.end_of_month
 
       #Allow only one profit driver entry per month
-      pdriver = ProfitDriver.where({name: name_str, entry_date: ent_date, business_id: @business.id})
+      pdriver = ProfitDriver.where({
+        name: name_str, entry_date: ent_date, business_id: @business.id
+      })
       if !pdriver.nil? && pdriver.count > 0
         pdriver.update(percent: pct, fixed_cost: fc, var_cost: vc)
       else 
-        pdriver = ProfitDriver.new(name: name_str, percent: pct, fixed_cost: fc, var_cost: vc, business_id: @business.id, entry_date: ent_date)
+        pdriver = ProfitDriver.new(
+          name: name_str, percent: pct, fixed_cost: fc, var_cost: vc, 
+          business_id: @business.id, entry_date: ent_date
+        )
         if !pdriver.save
           errors += pdriver.errors.full_messages
         end

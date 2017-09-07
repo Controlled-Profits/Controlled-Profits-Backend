@@ -74,14 +74,14 @@ Following that sign in response, these fields must be provided in every subseque
 {
   data: [
     {
-      id: "1"
-      type: "business_data_entry"
-      entry_type: "actual"
-      entry_date: "2017-09-30T19:34:55.000Z"
-      business_id: "5"
-      income_statement: {...}
-      balance_sheet: {...}
-      sales_and_marketing: {...}
+      id: "1",
+      type: "business_data_entry",
+      entry_type: "actual",
+      entry_date: "2017-09-30T19:34:55.000Z",
+      business_id: "5",
+      income_statement: {...},
+      balance_sheet: {...},
+      sales_and_marketing: {...},
       financial_roi: {...}
     }, 
     {
@@ -92,7 +92,7 @@ Following that sign in response, these fields must be provided in every subseque
 }
 ```
 
-For example, a get request to the url:
+For example, a GET request to the url:
 
 http://localhost:3000/v1/businesses/1/data?section=income_statement&entry_type=actual&start_date=2017/09/03&end_date=2017/09/06
 
@@ -258,4 +258,24 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 		}
 	}
 }
+```
+
+Individually selected profit drivers can also be updated within the same month:
+```
+{
+	"data": {
+		"type": "profit_drivers_data",
+		"profit_drivers": {
+      "frequency": {
+				"percent": 0.07,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			},
+      "productivity": {
+				"percent": 0.01,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			}
+      ...
+  ...
 ```

@@ -43,6 +43,7 @@ class BusinessDataSerializer
       data_sections = [args[:section].downcase]
     end
 
+    #Roll each section into into its parent, and then roll those into the data object array
     obj_array.each do |obj| 
       next if args.has_key?(:entry_type) && obj.entry_type != args[:entry_type]
       obj_data = {
@@ -52,13 +53,13 @@ class BusinessDataSerializer
         entry_date: obj.entry_date,
         business_id: obj.business_id
       }
-      data_sections.each do |section| #Extract given section's keys of each object
+      data_sections.each do |section|
         selected_keys = case section
         when "income_statement" #Income Statement Group
           %w(period_sales cash_collections credit_sales cogs marketing 
           direct_labor distribution vpie salaries benefit_admin office_lease office_supplies
           utilities transportation online_expenses insurance training accounting_and_legal
-          advertising marketing_development other fpie interest_paid depreciation_and_amortizaton
+          advertising marketing_development other fpie interest_paid depreciation_and_amortization
           tax_rate dividends entry_date)
         when "balance_sheet" #Balance Sheet Group
           %w(cash accounts_receivable inventory prepaid_expenses
@@ -79,6 +80,8 @@ class BusinessDataSerializer
         obj_data[section] = section_data
       end
       result_data.push(obj_data)
+
+      p result_data
     end 
 
     result_obj = {
