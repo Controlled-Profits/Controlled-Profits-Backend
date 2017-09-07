@@ -288,8 +288,9 @@ Individually selected profit drivers can also be updated or created within the s
 				"var_cost": 100.0,
 				"fixed_cost": 100.0
 			}
-      ...
-  ...
+    }
+  }
+}
 ```
 
 Example response from `GET` request to 
