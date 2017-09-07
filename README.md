@@ -142,7 +142,7 @@ might return this response:
 
 #### Creating a new business data entry:
 
-entry_date will automatically be stored as the last day at the end of the month, and is not a required field
+**NOTE: entry_date will automatically be stored as the last day at the end of the month, and is not a required field**
 
 POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 
@@ -224,7 +224,10 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 
 * More parameters may be added as necessary
 
+#### Creating a new profit driver entry
+
 **NOTE: All JSON POST request headers must contain the field `Content-Type: application/json`**
+**NOTE: entry_date will automatically be stored as the last day at the end of the month, and is not a required field**
 
   Example body of `POST` request to `http://localhost:3000/v1/businesses/1/profit_drivers` :
 ```
@@ -292,6 +295,7 @@ Individually selected profit drivers can also be updated or created within the s
     }
   }
 ```
+#### Querying profit driver entries
 
 Example response from `GET` request to 
 `http://localhost:3000/v1/businesses/1/profit_drivers/?start_date=2017/09/030&end_date=2017/09/31` :
