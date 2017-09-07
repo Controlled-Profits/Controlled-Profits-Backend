@@ -12,20 +12,3 @@ class BusinessSerializer < BaseSerializer
   attribute :ein
   attribute :tier
 end
-
-class IncomeSerializer < BaseSerializer
-  attribute :business_id
-  attribute :period_sales
-  attribute :cash_collections
-  attribute :credit_sales
-  attribute :entry_date
-end
-
-class CostOfSalesSerializer < BaseSerializer
-  attribute :business_id
-  attribute :cogs
-  attribute :marketing
-  attribute :direct_labor
-  attribute :distribution
-  attribute :vpie
-end

@@ -15,7 +15,7 @@
 #     id: "1"
 #     type: "business_data_entry"
 #     entry_type: "(actual || adjusted)"
-#     entry_date: "2012/04/21"
+#     entry_date: "2017-09-30T19:34:55.000Z"
 #     business_id: "5"
 #     income_statement: {...}
 #     balance_sheet: {...}
@@ -39,12 +39,13 @@ class BusinessDataSerializer
     result_data = []
     data_sections = %w(income_statement balance_sheet sales_and_marketing financial_roi)
 
-    if args.has_key?(:section) && data_sections.include?(args[:section].downcase)
+    if args.key?(:section) && data_sections.include?(args[:section].downcase)
       data_sections = [args[:section].downcase]
     end
 
+    #Roll each section into into its parent, and then roll those into the data object array
     obj_array.each do |obj| 
-      next if args.has_key?(:entry_type) && obj.entry_type != args[:entry_type]
+      next if args.key?(:entry_type) && obj.entry_type != args[:entry_type]
       obj_data = {
         id: obj.id,
         type: "business_data_entry",
@@ -52,13 +53,13 @@ class BusinessDataSerializer
         entry_date: obj.entry_date,
         business_id: obj.business_id
       }
-      data_sections.each do |section| #Extract given section's keys of each object
+      data_sections.each do |section|
         selected_keys = case section
         when "income_statement" #Income Statement Group
           %w(period_sales cash_collections credit_sales cogs marketing 
           direct_labor distribution vpie salaries benefit_admin office_lease office_supplies
           utilities transportation online_expenses insurance training accounting_and_legal
-          advertising marketing_development other fpie interest_paid depreciation_and_amortizaton
+          advertising marketing_development other fpie interest_paid depreciation_and_amortization
           tax_rate dividends entry_date)
         when "balance_sheet" #Balance Sheet Group
           %w(cash accounts_receivable inventory prepaid_expenses
@@ -85,6 +86,6 @@ class BusinessDataSerializer
       data: result_data
     }
 
-    result_obj.to_json rescue nil
+    result_obj.to_json rescue Array.new.to_json
   end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     #Business routes
     resources :businesses do
       resources :business_data_entries, path: '/data'
+      resources :profit_drivers, only: [:index, :create]
     end
   end
 

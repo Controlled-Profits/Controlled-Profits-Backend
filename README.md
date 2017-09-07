@@ -74,14 +74,14 @@ Following that sign in response, these fields must be provided in every subseque
 {
   data: [
     {
-      id: "1"
-      type: "business_data_entry"
-      entry_type: "actual"
-      entry_date: "2017-09-30T19:34:55.000Z"
-      business_id: "5"
-      income_statement: {...}
-      balance_sheet: {...}
-      sales_and_marketing: {...}
+      id: "1",
+      type: "business_data_entry",
+      entry_type: "actual",
+      entry_date: "2017-09-30T19:34:55.000Z",
+      business_id: "5",
+      income_statement: {...},
+      balance_sheet: {...},
+      sales_and_marketing: {...},
       financial_roi: {...}
     }, 
     {
@@ -92,11 +92,59 @@ Following that sign in response, these fields must be provided in every subseque
 }
 ```
 
+For example, a `GET` request to the url:
+
+`http://localhost:3000/v1/businesses/1/data?section=income_statement&entry_type=actual&start_date=2017/09/03&end_date=2017/09/06`
+
+might return this response:
+```
+{
+    "data": [
+        {
+            "id": 3,
+            "type": "business_data_entry",
+            "entry_type": "actual",
+            "entry_date": "2017-09-03T19:34:55.000Z",
+            "business_id": 1,
+            "income_statement": {
+                "period_sales": "9.99",
+                "cash_collections": "9.99",
+                "credit_sales": "9.99",
+                "cogs": "9.99",
+                "marketing": "9.99",
+                "direct_labor": "9.99",
+                "distribution": "9.99",
+                "vpie": "9.99",
+                "salaries": "9.99",
+                "benefit_admin": "9.99",
+                "office_lease": "9.99",
+                "office_supplies": "9.99",
+                "utilities": "9.99",
+                "transportation": "9.99",
+                "online_expenses": "9.99",
+                "insurance": "9.99",
+                "training": "9.99",
+                "accounting_and_legal": "9.99",
+                "advertising": "9.99",
+                "marketing_development": "9.99",
+                "other": "9.99",
+                "fpie": "9.99",
+                "interest_paid": "9.99",
+                "depreciation_and_amortizaton": "9.99",
+                "tax_rate": "9.99",
+                "dividends": "9.99",
+                "entry_date": "2017-09-03T19:34:55.000Z"
+            }
+        }
+    ]
+}
+```
+
 #### Creating a new business data entry:
 
-entry_date will automatically be stored as the last day at the end of the month, and is not a required field
+**NOTE: entry_date will automatically be stored as the last day at the end of the month, and is not a required field**
 
-POST to /v1/businesses/:bid/data/ with the following fields: (have fun)
+POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 
   :period_sales,
   :cash_collections,
@@ -158,3 +206,124 @@ POST to /v1/businesses/:bid/data/ with the following fields: (have fun)
   :airp_equity,
   :airc_for_financing,
   :corp_tax_rate
+
+### Profit Drivers Routes 
+
+**NOTE: All of these paths are preceded by `/v1/businesses/:bid/profit_drivers/`**
+**Also, all request headers must include the fields described in the `Authentication` section**  
+
+| path | method | purpose |
+|:-----|:-------|:--------|
+| / | GET | Returns all of the current business' profit driver values for the current month |
+| / | POST | Creates a new profit driver entry for the current month, given the JSON request as laid out below |
+
+#### Optional request parameters (Join as many as necessary in the URL with the & symbol)
+| path | method | purpose |
+|:-----|:-------|:--------|
+| /?start_date=yyyy/mm/dd&end_date=yyyy/mm/dd) | GET | Returns a business' profit driver inputs within the specified date range |
+
+* More parameters may be added as necessary
+
+----------------------------------------------
+
+#### Creating a new profit driver entry
+
+**NOTE: All JSON POST request headers must contain the field `Content-Type: application/json`**
+**NOTE: entry_date will automatically be stored as the last day at the end of the month, and is not a required field**
+
+  Example body of `POST` request to `http://localhost:3000/v1/businesses/1/profit_drivers` :
+```
+  {
+	"data": {
+		"type": "profit_drivers_data",
+		"profit_drivers": {
+			"prospects": {
+				"percent": 0.01,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			},
+			"conversions": {
+				"percent": 0.15,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			},
+			"volume": {
+				"percent": 0.05,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			},
+			"price": {
+				"percent": 0.03,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			},
+			"productivity": {
+				"percent": 0.01,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			},
+			"efficiency": {
+				"percent": 0.01,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			},
+			"frequency": {
+				"percent": 0.07,
+				"var_cost": 100.0,
+				"fixed_cost": 100.0
+			}
+		}
+	}
+}
+```
+
+Individually selected profit drivers can also be updated or created within the same month:
+```
+  {
+    "data": {
+      "type": "profit_drivers_data",
+      "profit_drivers": {
+        "frequency": {
+          "percent": 0.07,
+          "var_cost": 100.0,
+          "fixed_cost": 100.0
+        },
+        "productivity": {
+          "percent": 0.01,
+          "var_cost": 100.0,
+          "fixed_cost": 100.0
+        }
+      }
+    }
+  }
+```
+
+----------------------------------------------
+
+#### Querying profit driver entries
+
+Example response from `GET` request to 
+`http://localhost:3000/v1/businesses/1/profit_drivers/?start_date=2017/09/030&end_date=2017/09/31` :
+
+```
+{
+    "data": {
+        "type": "profit_drivers_data",
+        "profit_drivers": {
+            "conversions": {
+                "percent": "0.15",
+                "var_cost": "100.0",
+                "fixed_cost": "100.0"
+            },
+            "volume": {
+                "percent": "0.05",
+                "var_cost": "100.0",
+                "fixed_cost": "100.0"
+            },
+            ...,
+            ...
+        },
+        "entry_date": "2017-09-30T23:59:59.999Z"
+    }
+}
+```
