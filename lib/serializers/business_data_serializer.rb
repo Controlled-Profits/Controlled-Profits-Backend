@@ -39,13 +39,13 @@ class BusinessDataSerializer
     result_data = []
     data_sections = %w(income_statement balance_sheet sales_and_marketing financial_roi)
 
-    if args.has_key?(:section) && data_sections.include?(args[:section].downcase)
+    if args.key?(:section) && data_sections.include?(args[:section].downcase)
       data_sections = [args[:section].downcase]
     end
 
     #Roll each section into into its parent, and then roll those into the data object array
     obj_array.each do |obj| 
-      next if args.has_key?(:entry_type) && obj.entry_type != args[:entry_type]
+      next if args.key?(:entry_type) && obj.entry_type != args[:entry_type]
       obj_data = {
         id: obj.id,
         type: "business_data_entry",
@@ -80,8 +80,6 @@ class BusinessDataSerializer
         obj_data[section] = section_data
       end
       result_data.push(obj_data)
-
-      p result_data
     end 
 
     result_obj = {

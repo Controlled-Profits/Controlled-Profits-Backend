@@ -1,13 +1,22 @@
-require 'serializers/business_serializers.rb'
-require 'serializers/profit_drivers_serializer.rb'
+require 'serializers/business_serializers'
+require 'serializers/profit_driver_serializer'
 class V1::ProfitDriversController < V1::APIController
   before_action :authenticate_user!
   before_action :set_business
   before_action :user_owns_business?
 
   def index
-    @pdrivers = ProfitDriver.where(business_data_query_hash)
-    
+    #TODO: Organize multi-month entry returns
+    @pdrivers = []
+    if params[:start_date].present? && params[:end_date].present?
+      @pdrivers = ProfitDriver.where(business_data_query_hash)
+    else #Get profit drivers for current month by default
+      @pdrivers = ProfitDriver.where({
+        business_id: @business.id, 
+        entry_date: Time.now.utc.end_of_month
+      })
+    end
+    render json: ProfitDriverSerializer.serialize(Array.wrap(@pdrivers))
   end
 
   def create 
@@ -17,14 +26,6 @@ class V1::ProfitDriversController < V1::APIController
     else 
       render json: { errors: errors }
     end
-  end
-
-  def show
-
-  end
-
-  def destroy
-
   end
 
   private 

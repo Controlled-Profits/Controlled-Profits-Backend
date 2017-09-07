@@ -130,7 +130,7 @@ might return this response:
                 "other": "9.99",
                 "fpie": "9.99",
                 "interest_paid": "9.99",
-                "depreciation_and_amortizaton": null,
+                "depreciation_and_amortizaton": "9.99",
                 "tax_rate": "9.99",
                 "dividends": "9.99",
                 "entry_date": "2017-09-03T19:34:55.000Z"
@@ -260,7 +260,7 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 }
 ```
 
-Individually selected profit drivers can also be updated within the same month:
+Selected profit drivers can also be updated or created individually within the same month:
 ```
 {
 	"data": {
