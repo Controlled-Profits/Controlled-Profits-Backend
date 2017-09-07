@@ -224,6 +224,8 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 
 * More parameters may be added as necessary
 
+----------------------------------------------
+
 #### Creating a new profit driver entry
 
 **NOTE: All JSON POST request headers must contain the field `Content-Type: application/json`**
@@ -295,6 +297,9 @@ Individually selected profit drivers can also be updated or created within the s
     }
   }
 ```
+
+----------------------------------------------
+
 #### Querying profit driver entries
 
 Example response from `GET` request to 
