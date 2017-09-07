@@ -92,7 +92,7 @@ Following that sign in response, these fields must be provided in every subseque
 }
 ```
 
-For example, a GET request to the url:
+For example, a `GET` request to the url:
 
 http://localhost:3000/v1/businesses/1/data?section=income_statement&entry_type=actual&start_date=2017/09/03&end_date=2017/09/06
 
@@ -212,9 +212,21 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 **NOTE: All of these paths are preceded by `/v1/businesses/:bid/profit_drivers/`**
 **Also, all request headers must include the fields described in the `Authentication` section**  
 
-**All JSON POST request headers must contain the field `Content-Type: application/json`**
+| path | method | purpose |
+|:-----|:-------|:--------|
+| / | GET | Returns all of the current business' profit driver values for the current month |
+| / | POST | Creates a new profit driver entry for the current month, given the JSON request as laid out below |
 
-  Example body of POST request to `http://localhost:3000/v1/businesses/1/profit_drivers` :
+#### Optional request parameters (Join as many as necessary in the URL with the & symbol)
+| path | method | purpose |
+|:-----|:-------|:--------|
+| /?start_date=yyyy/mm/dd&end_date=yyyy/mm/dd) | GET | Returns a business' profit driver inputs within the specified date range |
+
+* More parameters may be added as necessary
+
+**NOTE: All JSON POST request headers must contain the field `Content-Type: application/json`**
+
+  Example body of `POST` request to `http://localhost:3000/v1/businesses/1/profit_drivers` :
 ```
   {
 	"data": {
@@ -260,7 +272,7 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 }
 ```
 
-Selected profit drivers can also be updated or created individually within the same month:
+Individually selected profit drivers can also be updated or created within the same month:
 ```
 {
 	"data": {
@@ -278,4 +290,30 @@ Selected profit drivers can also be updated or created individually within the s
 			}
       ...
   ...
+```
+
+Example response from `GET` request to 
+`http://localhost:3000/v1/businesses/1/profit_drivers/?start_date=2017/09/030&end_date=2017/09/31` :
+
+```
+{
+    "data": {
+        "type": "profit_drivers_data",
+        "profit_drivers": {
+            "conversions": {
+                "percent": "0.15",
+                "var_cost": "100.0",
+                "fixed_cost": "100.0"
+            },
+            "volume": {
+                "percent": "0.05",
+                "var_cost": "100.0",
+                "fixed_cost": "100.0"
+            },
+            ...,
+            ...
+        },
+        "entry_date": "2017-09-30T23:59:59.999Z"
+    }
+}
 ```
