@@ -274,23 +274,23 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
 
 Individually selected profit drivers can also be updated or created within the same month:
 ```
-{
-	"data": {
-		"type": "profit_drivers_data",
-		"profit_drivers": {
-      "frequency": {
-				"percent": 0.07,
-				"var_cost": 100.0,
-				"fixed_cost": 100.0
-			},
-      "productivity": {
-				"percent": 0.01,
-				"var_cost": 100.0,
-				"fixed_cost": 100.0
-			}
+  {
+    "data": {
+      "type": "profit_drivers_data",
+      "profit_drivers": {
+        "frequency": {
+          "percent": 0.07,
+          "var_cost": 100.0,
+          "fixed_cost": 100.0
+        },
+        "productivity": {
+          "percent": 0.01,
+          "var_cost": 100.0,
+          "fixed_cost": 100.0
+        }
+      }
     }
   }
-}
 ```
 
 Example response from `GET` request to 
