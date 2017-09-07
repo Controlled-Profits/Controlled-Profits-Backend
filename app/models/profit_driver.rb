@@ -1,0 +1,2 @@
+class ProfitDriver < ApplicationRecord
+end

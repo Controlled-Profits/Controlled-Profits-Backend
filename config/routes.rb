@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     #Business routes
     resources :businesses do
       resources :business_data_entries, path: '/data'
+      post '/profit_drivers' => 'profit_drivers#create'
     end
   end
 

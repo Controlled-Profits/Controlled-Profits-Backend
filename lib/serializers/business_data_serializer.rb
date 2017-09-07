@@ -15,7 +15,7 @@
 #     id: "1"
 #     type: "business_data_entry"
 #     entry_type: "(actual || adjusted)"
-#     entry_date: "2012/04/21"
+#     entry_date: "2017-09-30T19:34:55.000Z"
 #     business_id: "5"
 #     income_statement: {...}
 #     balance_sheet: {...}
@@ -85,6 +85,6 @@ class BusinessDataSerializer
       data: result_data
     }
 
-    result_obj.to_json rescue nil
+    result_obj.to_json rescue Array.new.to_json
   end
 end

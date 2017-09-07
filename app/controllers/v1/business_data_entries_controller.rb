@@ -26,6 +26,20 @@ class V1::BusinessDataEntriesController < V1::APIController
     render json: BusinessDataSerializer.serialize(@bde, serializer_args_hash)
   end
 
+  def update 
+    @bde = BusinessDataEntry.find(params[:id])
+    if @bde.update_attributes(bde_params)
+      render json: BusinessDataSerializer.serialize(Array.wrap(@bde))
+    else
+      render json: { errors: @bde.errors.full_messages }
+    end
+  end
+
+  def destroy
+    @bde = BusinessDataEntry.find(params[:id])
+    @bde.destroy if !@bde.nil?
+  end
+
   private
 
   #Returns arguments as hash for BDE serializer function, if they are present
