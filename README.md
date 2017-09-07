@@ -94,7 +94,7 @@ Following that sign in response, these fields must be provided in every subseque
 
 For example, a `GET` request to the url:
 
-http://localhost:3000/v1/businesses/1/data?section=income_statement&entry_type=actual&start_date=2017/09/03&end_date=2017/09/06
+`http://localhost:3000/v1/businesses/1/data?section=income_statement&entry_type=actual&start_date=2017/09/03&end_date=2017/09/06`
 
 might return this response:
 ```
