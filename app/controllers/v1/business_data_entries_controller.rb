@@ -17,7 +17,7 @@ class V1::BusinessDataEntriesController < V1::APIController
     if @bde.save
       render json: BusinessDataSerializer.serialize(Array.wrap(@bde))
     else
-      render json: { errors: @bde.errors.full_messages }
+      render json: { errors: @bde.errors.full_messages }, status: :bad_request
     end
   end
 
@@ -31,7 +31,7 @@ class V1::BusinessDataEntriesController < V1::APIController
     if @bde.update_attributes(bde_params)
       render json: BusinessDataSerializer.serialize(Array.wrap(@bde))
     else
-      render json: { errors: @bde.errors.full_messages }
+      render json: { errors: @bde.errors.full_messages }, status: :bad_request
     end
   end
 

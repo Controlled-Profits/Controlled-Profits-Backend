@@ -9,6 +9,7 @@ class UserSerializer < BaseSerializer
   attribute :lastname
   attribute :email
   attribute :tier
+  attribute :active_business_id
 end
 
 class BusinessSerializer < BaseSerializer
