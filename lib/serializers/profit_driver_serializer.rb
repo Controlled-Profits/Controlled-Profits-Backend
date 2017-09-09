@@ -1,6 +1,6 @@
 class ProfitDriverSerializer
   def self.serialize(obj_array, args = {})
-    if obj_array.empty? then return Array.new.to_json end
+    if obj_array.empty? then return {data: {}} end
     
     result_data = {
       type: "profit_drivers_data",
