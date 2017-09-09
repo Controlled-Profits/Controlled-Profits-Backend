@@ -89,7 +89,7 @@ class V1::BusinessDataEntriesController < V1::APIController
     :leasehold_improvements,
     :land_and_buildings,
     :other_fixed_assets,
-    :accumulated_depriciation,
+    :accumulated_depreciation,
     :goodwill,
     :accounts_payable,
     :interests_payable,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907151614) do
+ActiveRecord::Schema.define(version: 20170909021116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20170907151614) do
     t.decimal "leasehold_improvements"
     t.decimal "land_and_buildings"
     t.decimal "other_fixed_assets"
-    t.decimal "accumulated_depriciation"
+    t.decimal "accumulated_depreciation"
     t.decimal "goodwill"
     t.decimal "accounts_payable"
     t.decimal "interests_payable"
