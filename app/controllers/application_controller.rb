@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   protected
   #Override permitted devise params
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :email, :password, :password_confirmation])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname, :email, :password, :password_confirmation, :current_password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :email, :active_business_id, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname, :email, :active_business_id, :password, :password_confirmation, :current_password])
   end
 end

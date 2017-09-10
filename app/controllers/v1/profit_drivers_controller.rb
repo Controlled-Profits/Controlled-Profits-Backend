@@ -22,7 +22,7 @@ class V1::ProfitDriversController < V1::APIController
   def create 
     errors = create_pdrivers_from_json(params[:data])
     if errors.empty?
-      render json: {data: {meta: "Successfully saved all profit drivers."}}
+      render json: {data: {meta: {message: "Successfully saved all profit drivers."}}}
     else 
       render json: { errors: errors }, status: :bad_request
     end

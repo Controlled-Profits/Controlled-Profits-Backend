@@ -28,9 +28,9 @@ Following that sign in response, these fields must be provided in every subseque
 
 | path | method | purpose |
 |:-----|:-------|:--------|
-| /    | POST   | Email registration. Requires **`firstname`**, **`lastname`**, **`email`**, **`password`**, and **`password_confirmation`** params.|
+| /    | POST   | Email registration. Requires **`firstname`**, **`lastname`**, **`email`**, **`password`**, and **`password_confirmation`** params. Allows **`active_business_id`**|
 | / | DELETE | Account deletion. This route will destroy users identified by their **`uid`**, **`access_token`** and **`client`** headers. |
-| / | PUT/PATCH | Account updates. This route will update an existing user's account settings. Accepted params are **`firstname`**, **`lastname`**, **`password`** and **`password_confirmation`**. If **`config.check_current_password_before_update`** is set to `:attributes` the **`current_password`** param is checked before any update, if it is set to `:password` the **`current_password`** param is checked only if the request updates user password. |
+| / | PUT/PATCH | Account updates. This route will update an existing user's account settings. Accepted params are **`firstname`**, **`lastname`**, **`active_business_id`**, **`password`** and **`password_confirmation`**. If **`config.check_current_password_before_update`** is set to `:attributes` the **`current_password`** param is checked before any update, if it is set to `:password` the **`current_password`** param is checked only if the request updates user password. |
 | /sign_in | POST | Email authentication. Requires **`email`** and **`password`** as params. This route will return a JSON representation of the `User` model on successful login along with the `access-token` and `client` in the header of the response. |
 | /sign_out | DELETE | Use this route to end the user's current session. This route will invalidate the user's authentication token. You must pass in **`uid`**, **`client`**, and **`access-token`** in the request headers. |
 | /:provider | GET | Set this route as the destination for client authentication. Ideally this will happen in an external window or popup. [Read more](#omniauth-authentication). |
@@ -183,7 +183,7 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
   :leasehold_improvements,
   :land_and_buildings,
   :other_fixed_assets,
-  :accumulated_depriciation,
+  :accumulated_depreciation,
   :goodwill,
   :accounts_payable,
   :interests_payable,
