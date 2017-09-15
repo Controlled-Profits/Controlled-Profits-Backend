@@ -56,8 +56,7 @@ class V1::BusinessDataEntriesController < V1::APIController
   end
 
   def bde_params
-    params.permit(:period_sales,
-    :cash_collections,
+    params.permit(:total_revenues,
     :credit_sales,
     :cogs,
     :marketing,
@@ -107,11 +106,11 @@ class V1::BusinessDataEntriesController < V1::APIController
     :other_long_term_debt,
     :common_stock,
     :paid_in_surplus,
-    :retained_earning,
+    :retained_earnings,
     :prospects,
     :number_of_sales,
     :marketing_spend,
-    :grand_total_unit,
+    :grand_total_units,
     :airp_debt,
     :airp_equity,
     :airc_for_financing,

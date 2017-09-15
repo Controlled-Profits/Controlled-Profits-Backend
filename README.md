@@ -145,9 +145,7 @@ might return this response:
 **NOTE: entry_date will automatically be stored as the last day at the end of the month, and is not a required field**
 
 POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
-
-  :period_sales,
-  :cash_collections,
+  :total_revenues,
   :credit_sales,
   :cogs,
   :marketing,
@@ -197,11 +195,11 @@ POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
   :other_long_term_debt,
   :common_stock,
   :paid_in_surplus,
-  :retained_earning,
+  :retained_earnings,
   :prospects,
   :number_of_sales,
   :marketing_spend,
-  :grand_total_unit,
+  :grand_total_units,
   :airp_debt,
   :airp_equity,
   :airc_for_financing,

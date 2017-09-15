@@ -56,7 +56,7 @@ class BusinessDataSerializer
       data_sections.each do |section|
         selected_keys = case section
         when "income_statement" #Income Statement Group
-          %w(period_sales cash_collections credit_sales cogs marketing 
+          %w(total_revenues credit_sales cogs marketing 
           direct_labor distribution vpie salaries benefit_admin office_lease office_supplies
           utilities transportation online_expenses insurance training accounting_and_legal
           advertising marketing_development other fpie interest_paid depreciation_and_amortization
