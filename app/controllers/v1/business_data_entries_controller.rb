@@ -10,10 +10,14 @@ class V1::BusinessDataEntriesController < V1::APIController
   end
 
   def create
-    #TODO: Ensure that two entries of the same type are not submitted in the same month ..?
     @bde = BusinessDataEntry.new(bde_params)
     @bde[:business_id] = @business.id
     @bde[:entry_date] = Time.now.utc.end_of_month
+
+    #Delete old business data entry if one already exists for current month
+    @old_bde = BusinessDataEntry.where({entry_date: Time.now.utc.end_of_month}) 
+    @old_bde.destroy if !@old_bde.nil? 
+
     if @bde.save
       render json: BusinessDataSerializer.serialize(Array.wrap(@bde))
     else
