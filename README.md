@@ -140,6 +140,92 @@ might return this response:
 }
 ```
 
+Complete response example given entry_type=actual:
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "type": "business_data_entry",
+            "entry_type": "actual",
+            "entry_date": "2017-09-30T23:59:59.999Z",
+            "business_id": 1,
+            "income_statement": {
+                "total_revenues": "1397500.0",
+                "credit_sales": "50000.0",
+                "cogs": "594000.0",
+                "marketing": "38250.0",
+                "direct_labor": "15000.0",
+                "distribution": "18000.0",
+                "vpie": null,
+                "salaries": "120000.0",
+                "benefit_admin": "18972.0",
+                "office_lease": "12000.0",
+                "office_supplies": "1000.0",
+                "utilities": "5400.0",
+                "transportation": "6800.0",
+                "online_expenses": "2700.0",
+                "insurance": "2448.0",
+                "training": "6000.0",
+                "accounting_and_legal": "2400.0",
+                "advertising": "1000.0",
+                "marketing_development": "500.0",
+                "other": "0.0",
+                "fpie": "0.0",
+                "interest_paid": "3500.0",
+                "depreciation_and_amortization": "2500.0",
+                "tax_rate": "0.34",
+                "dividends": "50000.0",
+                "entry_date": "2017-09-30T23:59:59.999Z"
+            },
+            "balance_sheet": {
+                "cash": "125000.0",
+                "accounts_receivable": "110000.0",
+                "inventory": "88000.0",
+                "prepaid_expenses": "25000.0",
+                "other_current_assets": "10000.0",
+                "ppe": "15000.0",
+                "furniture_and_fixtures": "10000.0",
+                "leasehold_improvements": "1000.0",
+                "land_and_buildings": "167000.0",
+                "other_fixed_assets": "44000.0",
+                "accumulated_depreciation": "25000.0",
+                "goodwill": "280000.0",
+                "accounts_payable": "50000.0",
+                "interest_payable": null,
+                "taxes_payable": "15000.0",
+                "deferred_revenue": "22000.0",
+                "short_term_notes": "50000.0",
+                "current_debt": "50000.0",
+                "other_current_liabilities": "38000.0",
+                "bank_loans_payable": "90000.0",
+                "notes_payable_to_stockholders": "75000.0",
+                "other_long_term_debt": "38000.0",
+                "common_stock": "44000.0",
+                "paid_in_surplus": "0.0",
+                "retained_earnings": "253000.0",
+                "entry_date": "2017-09-30T23:59:59.999Z"
+            },
+            "sales_and_marketing": {
+                "prospects": "50000.0",
+                "number_of_sales": "10200.0",
+                "marketing_spend": "38250.0",
+                "grand_total_units": "14500.0",
+                "entry_date": "2017-09-30T23:59:59.999Z"
+            },
+            "financial_roi": {
+                "airp_debt": "0.08",
+                "airp_equity": "0.04",
+                "airc_for_financing": "0.12",
+                "corp_tax_rate": "0.34",
+                "entry_date": "2017-09-30T23:59:59.999Z"
+            }
+        }
+    ]
+}
+```
+
 #### Creating a new business data entry:
 
 **NOTE: entry_date will automatically be stored as the last day at the end of the month, and is not a required field**
