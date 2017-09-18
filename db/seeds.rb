@@ -37,7 +37,7 @@ bde1 = BusinessDataEntry.create(
   fpie: 0,
   ebitda: 505530.00,
   interest_paid: 3500.00,
-  donations: 0
+  donations: 0,
   depreciation_and_amortization: 2500.00,
   tax_rate: 0.34,
   dividends: 50000.00,
