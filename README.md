@@ -131,6 +131,7 @@ might return this response:
                 "fpie": "9.99",
                 "interest_paid": "9.99",
                 "depreciation_and_amortizaton": "9.99",
+                "donations": "0",
                 "tax_rate": "9.99",
                 "dividends": "9.99",
                 "entry_date": "2017-09-03T19:34:55.000Z"
@@ -175,6 +176,7 @@ Complete response example given entry_type=actual:
                 "fpie": "0.0",
                 "interest_paid": "3500.0",
                 "depreciation_and_amortization": "2500.0",
+                "donations": 0,
                 "tax_rate": "0.34",
                 "dividends": "50000.0",
                 "entry_date": "2017-09-30T23:59:59.999Z"

@@ -80,6 +80,7 @@ class V1::BusinessDataEntriesController < V1::APIController
     :ebitda,
     :interest_paid,
     :depreciation_and_amortization,
+    :donations,
     :tax_rate,
     :dividends,
     :cash,

@@ -60,7 +60,7 @@ class BusinessDataSerializer
           direct_labor distribution vpie salaries benefit_admin office_lease office_supplies
           utilities transportation online_expenses insurance training accounting_and_legal
           advertising marketing_development other fpie interest_paid depreciation_and_amortization
-          tax_rate dividends entry_date)
+          donations tax_rate dividends entry_date)
         when "balance_sheet" #Balance Sheet Group
           %w(cash accounts_receivable inventory prepaid_expenses
           other_current_assets ppe furniture_and_fixtures leasehold_improvements
