@@ -65,7 +65,7 @@ class BusinessDataSerializer
           %w(cash accounts_receivable inventory prepaid_expenses
           other_current_assets ppe furniture_and_fixtures leasehold_improvements
           land_and_buildings other_fixed_assets accumulated_depreciation goodwill
-          accounts_payable interest_payable taxes_payable deferred_revenue short_term_notes
+          accounts_payable interests_payable taxes_payable deferred_revenue short_term_notes
           current_debt other_current_liabilities bank_loans_payable notes_payable_to_stockholders
           other_long_term_debt common_stock paid_in_surplus retained_earnings entry_date)
         when "sales_and_marketing" #Sales and marketing group
