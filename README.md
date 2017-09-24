@@ -233,6 +233,7 @@ Complete response example given entry_type=actual:
 **NOTE: entry_date will automatically be stored as the last day at the end of the month, and is not a required field**
 
 POST to `/v1/businesses/:bid/data/` with the following fields: (have fun)
+  :entry_type, 
   :total_revenues,
   :credit_sales,
   :cogs,

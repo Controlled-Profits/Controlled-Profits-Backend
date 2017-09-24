@@ -56,7 +56,8 @@ class V1::BusinessDataEntriesController < V1::APIController
   end
 
   def bde_params
-    params.permit(:total_revenues,
+    params.permit(:entry_type, 
+    :total_revenues,
     :credit_sales,
     :cogs,
     :marketing,
